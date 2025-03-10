@@ -87,16 +87,7 @@
     height: 600px; 
     object-fit: cover; 
 }
-.overlay-button {
-    position: absolute;
-    top: 120%;
-    left: 30%;
-    padding: 10px 20px;
-    font-size: 24px;
-    cursor: pointer;
-    border: none;
-    text-decoration: none;
-}
+
 
 .carousel-item {
     position: relative;
@@ -122,18 +113,50 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #cbc7c7e0; /* Texto un poco más opaco (gris claro) */
+    color: #cbc7c7e0;
     z-index: 1;
     padding: 20px;
-    display: flex; /* Añadido para organizar texto y botón */
-    flex-direction: column; /* Añadido para organizar texto y botón en columna */
-    align-items: center; /* Centrar los elementos horizontalmente dentro del caption */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.carousel-caption-custom h1 { /* Estilo para el título */
+    font-weight: bold; /* Hace el título en negrita */
+    font-size: 2.5em; /* Ajusta el tamaño del título si es necesario */
+    margin-bottom: 10px; /* Espacio debajo del título */
 }
 
 .carousel-caption-custom p {
+    font-weight: normal; /* Asegura que el párrafo no esté en negrita */
     font-size: 1.2em;
-    margin-bottom: 15px; /* Reducido el margen inferior entre párrafo y botón */
-    font-weight: bold;
+    margin-bottom: 20px; /* Aumenta el espacio entre el párrafo y el botón */
+}
+
+.carousel-caption-custom .btn { /* Estilo para el botón */
+    margin-top: 15px; /* Ajusta la separación entre el texto y el botón */
+}
+
+@media (max-width: 767.98px) {
+    .carousel-caption-custom {
+        top: 40%; /* Ajusta la posición vertical */
+        padding: 10px; /* Reduce el padding */
+    }
+
+    .carousel-caption-custom h1 {
+        font-size: 1.8em; /* Reduce el tamaño del título */
+        margin-bottom: 5px; /* Reduce el margen del título */
+    }
+
+    .carousel-caption-custom p {
+        font-size: 1em; /* Reduce el tamaño del párrafo */
+        margin-bottom: 10px; /* Reduce el margen del párrafo */
+    }
+
+    .carousel-caption-custom .btn {
+        font-size: 0.9em; /* Reduce el tamaño del botón */
+        padding: 8px 16px; /* Reduce el padding del botón */
+        margin-top: 10px; /* Reduce el margen superior del botón */
+    }
 }
 
 /* ===========================================
