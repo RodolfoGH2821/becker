@@ -258,6 +258,9 @@ def guardar_vehiculo():
 @app.route('/admin/eliminar_vehiculo', methods=['GET', 'POST'])
 @login_requerido
 def eliminar_vehiculo():
+    query_listar = "SELECT patente, modelo, marca, año, precio FROM vehiculos"
+    vehiculos = db.fetch_query(query_listar) or [] 
+    
     """Permite eliminar un vehículo."""
     if request.method == 'POST':
         patente = request.form.get('patente').strip()
@@ -271,7 +274,7 @@ def eliminar_vehiculo():
 
         if not vehiculo:
             flash("El vehículo no existe.", "danger")
-            return render_template('eliminar_vehiculo.html')
+            return render_template('eliminar_vehiculo.html', vehiculos = vehiculos)
 
         try:
             query_eliminar_imagenes = "DELETE FROM imagenes WHERE patente = %s"
@@ -288,13 +291,11 @@ def eliminar_vehiculo():
         except Exception as e:
             flash(f"Error al eliminar el vehículo: {str(e)}", "danger")
 
-    return render_template('eliminar_vehiculo.html')
+    return render_template('eliminar_vehiculo.html', vehiculos = vehiculos)
 
 ### --- NUEVAS RUTAS PARA GESTIÓN DE VEHÍCULOS --- ###
 @app.route('/admin/listar_vehiculos')
 @login_requerido
-
-
 def listar_vehiculos():
     query = """
             SELECT v.patente, v.marca, v.modelo, v.precio, i.ruta AS img
