@@ -298,10 +298,10 @@ def eliminar_vehiculo():
 @login_requerido
 def listar_vehiculos():
     query = """
-            SELECT v.patente, v.marca, v.modelo, v.precio, i.ruta AS img
-            FROM vehiculos v
-            LEFT JOIN imagenes i ON v.patente = i.patente
-            GROUP BY v.patente, v.marca, v.modelo, v.precio
+        SELECT v.patente, v.marca, v.modelo, v.estado, v.precio, v.año, i.ruta AS img
+        FROM vehiculos v
+        LEFT JOIN imagenes i ON v.patente = i.patente
+        GROUP BY v.patente, v.marca, v.modelo, v.estado, v.precio, v.año
     """
     vehiculos = db.fetch_query(query)
     return render_template('listar_vehiculos.html', vehiculos=vehiculos, active_page='listar_vehiculos')

@@ -18,28 +18,39 @@
         {% endif %}
     {% endwith %}
     <div class="row">
-        {% for vehiculo in vehiculos %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 d-flex flex-column">
-                {% if vehiculo.img %}
-                <img src="{{ url_for('static', filename=vehiculo.img) }}" class="card-img-top" alt="{{ vehiculo.marca }}">
-                {% else %}
-                <img src="{{ url_for('static', filename='img/default.jpg') }}" class="card-img-top" alt="Sin Imagen">
-                {% endif %}
-                <div class="card-body d-flex flex-column flex-grow-1">
-                    <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
-                    <p class="card-text">Precio: ${{ vehiculo.precio | miles }}</p>
-                    <div class="mt-auto">
-                        <a href="{{ url_for('editar_vehiculo', patente=vehiculo.patente) }}" class="btn btn-warning">
-                            <i class="fas fa-edit"></i> Editar
-                        </a>
-                    </div>
+        {% for auto in vehiculos %}
+        <div class="col-12 col-md-4 mb-4 card-img-aum">
+            <div class="card h-100 shadow">
+                <img 
+                    src="{{ url_for('static', filename=auto.img) if auto.img else url_for('static', filename='img/default.jpg') }}"
+                    class="card-img-top"
+                    alt="{{ auto.marca }} {{ auto.modelo }}"
+                    loading="lazy"
+                    width="300"
+                    height="200"
+                >
+                <div class="card-body">
+                    <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }} {{ auto.año }}</h5>
+    
+                    <p class="card-text">
+                        {% if auto.estado == 'Vendido' %}
+                            <span style="color: red; font-weight: bold;">{{ auto.estado }}</span>
+                        {% elif auto.estado == 'En Venta' %}
+                            <span style="color: green; font-weight: bold;">{{ auto.estado }}</span>
+                        {% else %}
+                            {{ auto.estado }}
+                        {% endif %}
+                    </p>
+    
+                    <p class="card-text">
+                        <strong>Precio:</strong> {{ auto.precio | miles }}
+                    </p>
+                    <a href="{{ url_for('vehiculo', patente=auto.patente) }}" class="btn btn-primary">Ver más</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-</div>
 
 {% endblock %}
 
