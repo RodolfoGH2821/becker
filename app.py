@@ -293,18 +293,18 @@ def eliminar_vehiculo():
 
     return render_template('eliminar_vehiculo.html', vehiculos = vehiculos)
 
-### --- NUEVAS RUTAS PARA GESTIÓN DE VEHÍCULOS --- ###
 @app.route('/admin/listar_vehiculos')
 @login_requerido
 def listar_vehiculos():
     query = """
-            SELECT v.patente, v.marca, v.modelo, v.precio, i.ruta AS img
+            SELECT v.patente, v.marca, v.modelo, v.precio, v.estado, i.ruta AS img
             FROM vehiculos v
             LEFT JOIN imagenes i ON v.patente = i.patente
-            GROUP BY v.patente, v.marca, v.modelo, v.precio
+            GROUP BY v.patente, v.marca, v.modelo, v.precio, v.estado
     """
     vehiculos = db.fetch_query(query)
     return render_template('listar_vehiculos.html', vehiculos=vehiculos, active_page='listar_vehiculos')
+
 
 @app.route('/admin/editar_vehiculo/<string:patente>', methods=['GET', 'POST'])
 @login_requerido
@@ -315,7 +315,7 @@ def editar_vehiculo(patente):
         modelo = request.form.get('modelo', '').strip()
         precio = request.form.get('precio', '').strip()
         año = request.form.get('año', '').strip()
-        transmicion = request.form.get('transmicion', '').strip()
+        # Se eliminó la variable 'transmicion'
         direccion = request.form.get('direccion', '').strip()
         combustible = request.form.get('combustible', '').strip()
         fecha_adquisicion = request.form.get('fecha_adquisicion', '').strip()
@@ -324,7 +324,7 @@ def editar_vehiculo(patente):
         descripcion = request.form.get('descripcion', '').strip()
         nuevas_imagenes = request.files.getlist('imagenes')
 
-        if not all([marca, modelo, precio, año, transmicion, direccion, combustible,
+        if not all([marca, modelo, precio, año, direccion, combustible,
                     fecha_adquisicion, kilometraje, estado, descripcion]):
             flash("Todos los campos son obligatorios.", "warning")
             return redirect(url_for('editar_vehiculo', patente=patente))
@@ -334,15 +334,14 @@ def editar_vehiculo(patente):
 
             query_update = """
                 UPDATE vehiculos
-                SET marca=%s, modelo=%s, precio=%s, año=%s, transmicion=%s, direccion=%s,
-                combustible=%s, fecha_adquisicion=%s, kilometraje=%s, estado=%s, descripcion=%s,
-                fecha_modificacion=%s  -- Agrega la columna fecha_modificacion
+                SET marca=%s, modelo=%s, precio=%s, año=%s, direccion=%s,
+                    combustible=%s, fecha_adquisicion=%s, kilometraje=%s, estado=%s, descripcion=%s,
+                    fecha_modificacion=%s
                 WHERE patente=%s
             """
-            db.execute_query(query_update, (marca, modelo, precio, año, transmicion, direccion, combustible,
+            db.execute_query(query_update, (marca, modelo, precio, año, direccion, combustible,
                                             fecha_adquisicion, kilometraje, estado, descripcion, 
                                             fecha_modificacion, patente))
-
 
             # Crear carpeta para el vehículo si no existe
             carpeta = os.path.join(app.config['UPLOAD_FOLDER'], patente)
@@ -376,6 +375,7 @@ def editar_vehiculo(patente):
                            vehiculo=vehiculo[0],
                            imagenes=imagenes,
                            active_page='editar_vehiculo')
+
 
 @app.route('/admin/eliminar_imagen/<int:id>', methods=['POST'])
 @login_requerido

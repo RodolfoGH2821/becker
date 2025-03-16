@@ -29,12 +29,14 @@
                 <div class="card-body d-flex flex-column flex-grow-1">
                     <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
                     <p class="card-text">Precio: ${{ vehiculo.precio | miles }}</p>
+                    <p class="card-text">Estado: {{ vehiculo.estado }}</p>
                     <div class="mt-auto">
                         <a href="{{ url_for('editar_vehiculo', patente=vehiculo.patente) }}" class="btn btn-warning">
                             <i class="fas fa-edit"></i> Editar
                         </a>
                     </div>
                 </div>
+                
             </div>
         </div>
         {% endfor %}
