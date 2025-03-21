@@ -215,7 +215,6 @@ def guardar_vehiculo():
         precio = request.form.get('precio').strip()
         año = request.form.get('año').strip()
         descripcion = request.form.get('descripcion').strip()
-        transmicion = request.form.get('transmicion').strip()
         direccion = request.form.get('direccion').strip()
         combustible = request.form.get('combustible').strip()
         fecha_adquisicion = request.form.get('fecha_adquisicion').strip()
@@ -223,7 +222,7 @@ def guardar_vehiculo():
         kilometraje = request.form.get('kilometraje').strip()
         imagenes = request.files.getlist('imagenes')
 
-        if not all([patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible,  fecha_adquisicion, estado, kilometraje ]):
+        if not all([patente, marca, modelo, precio, año, descripcion, direccion, combustible,  fecha_adquisicion, estado, kilometraje ]):
             flash("Todos los campos son obligatorios.", "warning")
             return render_template('agregar_vehiculo.html')
 
@@ -233,10 +232,10 @@ def guardar_vehiculo():
 
         try:
             query_vehiculo = """
-                INSERT INTO vehiculos (patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible, fecha_adquisicion, estado, kilometraje)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )
+                INSERT INTO vehiculos (patente, marca, modelo, precio, año, descripcion, direccion, combustible, fecha_adquisicion, estado, kilometraje)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )
             """
-            db.execute_query(query_vehiculo, (patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible, fecha_adquisicion, estado, kilometraje))
+            db.execute_query(query_vehiculo, (patente, marca, modelo, precio, año, descripcion, direccion, combustible, fecha_adquisicion, estado, kilometraje))
 
             for imagen in imagenes:
                 if imagen and imagen.filename:
