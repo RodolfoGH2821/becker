@@ -348,21 +348,22 @@
     text-align: center;
     margin-bottom: 20px; /* Espacio inferior para separarlo de otros elementos */
     background-color: #333; /* Mantengo tu color de fondo, pero recuerda que podría ocultar el borde */
-    border-color: var(--primary); /* Color azulado para el borde */
-    border-width: 6px; /* Ancho del borde */
-    border-style: solid; /* Estilo del borde (sólido, punteado, etc.) */
-    border-radius: 10px; /* Radio para hacer los bordes redondeados (ajusta el valor según necesites) */
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 8px;
+    box-shadow: 5px 5px grey; /* 5px de desplazamiento horizontal, 5px vertical, color predeterminado */
+
 }
 
 .horario-atencion h1 {
     font-size: 2.5em; /* Tamaño de fuente más grande para el título */
     font-weight: bold; /* Texto en negrita */
-    color: var(--primary); /* Color del texto (puedes ajustarlo) */
+    color: var(--light); /* Color del texto (puedes ajustarlo) */
     margin-bottom: 15px; /* Espacio debajo del título */
 }
 
 .horario-atencion h4 {
-    font-size: 1.2em; /* Tamaño de fuente para los días */
+    font-size: 1.4em; /* Tamaño de fuente para los días */
     font-weight: bold; /* Texto en negrita */
     color: var(--primary); /* Color del texto (puedes ajustarlo) */
     margin-top: 15px; /* Espacio encima de los días */
@@ -370,7 +371,7 @@
 }
 
 .horario-atencion p {
-    font-size: 1em; /* Tamaño de fuente normal para las horas */
+    font-size: 1.2em; /* Tamaño de fuente normal para las horas */
     color: #ffffff; /* Color del texto (puedes ajustarlo) */
     margin-top: 5px; /* Espacio encima de las horas */
     margin-bottom: 5px; /* Espacio debajo de las horas */
