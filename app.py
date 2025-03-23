@@ -86,10 +86,18 @@ def index():
                                 LIMIT 4
                                 """
     ultimas_publicaciones = db.fetch_query(query_ultimas_publicaciones)
+    
+        # Consulta para contar los vehículos disponibles
+    query_stock_disponible = "SELECT COUNT(*) AS total FROM vehiculos;"
+    resultado_stock = db.fetch_query(query_stock_disponible)
+
+    # Extraer el número total de vehículos disponibles
+    total_vehiculos = resultado_stock[0]['total'] if resultado_stock else 0
 
     return render_template('home.html', 
                            active_page='index', 
-                           ultimas_publicaciones=ultimas_publicaciones)  # Pasa las publicaciones al template
+                           ultimas_publicaciones=ultimas_publicaciones,
+                           total_vehiculos=total_vehiculos)
 
 
 

@@ -312,12 +312,12 @@
 .contact-form h5,
 .contact-form h6 {
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .contact-form .form-control {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 12px 15px;
+    
     font-size: 16px;
     transition: border 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 15px;
@@ -351,3 +351,43 @@
     display: none;
     z-index: 1000;
 }
+/* ===========================================
+   Banner de stock
+   =========================================== */
+.stock-banner {
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.stock-banner .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.stock-banner p {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.stock-banner .stock-number {
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 10px;
+    color: white;
+}
+
+.stock-banner .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff; /* Botón blanco */
+    color: #343a40; /* Texto azul */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Asegúrate de que estos estilos se integren bien con tus estilos existentes */
